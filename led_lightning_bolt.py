@@ -1,43 +1,34 @@
 import time
 from ledStrip import *
+from config import *
 sys.path.append(os.getcwd() + "/../audio-fingerprint-identifying-python/")
 from recognizer import *
 
-LED_COUNT = 300
-
 def turn_on_leds(strip):
     for k in range(LED_COUNT):
-        strip.setPixel(k, [255, 0, 0])
+        strip.setPixel(k, GREEN)
     strip.stripShow()
 
 def turn_off_leds(strip):
     for k in range(LED_COUNT):
-        strip.setPixel(k, [0, 0, 0])
+        strip.setPixel(k, GREEN)
     strip.stripShow()
 
-def animate_leds():
-    l = LedStrip(LED_COUNT)
-
-    # Blink
-    turn_on_leds(l)
-    time.sleep(0.2)
-    turn_off_leds(l)
-    time.sleep(1)
-
-    # Blink
-    turn_on_leds(l)
+def blink(strip):
+    turn_on_leds(strip)
     time.sleep(0.5)
-    turn_off_leds(l)
+    turn_off_leds(strip)
     time.sleep(2)
 
-    # On
-    turn_on_leds(l)
+def animate_leds():
+    lStrip = LedStrip(LED_COUNT)
+
+    blink(lStrip)
+    blink(lStrip)
+
+    turn_on_leds(lStrip)
     time.sleep(120)
-    turn_off_leds(l)
-    time.sleep(0.5)
-    turn_on_leds(l)
-    time.sleep(0.2)
-    turn_off_leds(l)
+    turn_off_leds(lStrip)
 
 
 def run_audio_recognition():

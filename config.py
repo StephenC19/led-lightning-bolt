@@ -1,0 +1,9 @@
+LED_COUNT = 300
+
+GPIO_PIN = 18
+
+GREEN = [255, 0, 0]
+RED = [0, 255, 0]
+BLUE = [0, 0, 255]
+
+PI_URL = ""

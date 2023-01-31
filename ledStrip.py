@@ -1,4 +1,3 @@
-from neopixel import *
 from datetime import datetime
 import time
 import random
@@ -7,8 +6,7 @@ import inspect
 import sys
 import json
 import os
-from utils import *
-from config import *
+from rpi_ws281x import PixelStrip, Color
 
 class LedStrip:
 
@@ -25,7 +23,7 @@ class LedStrip:
         LED_BRIGHTNESS = 255
         LED_INVERT = False
         LED_CHANNEL = 0
-        self.strip = Adafruit_NeoPixel(self.LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+        self.strip = PixelStrip(self.LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
         self.strip.begin()
         red = Color(255,0,0)
         green = Color(0,255,0)
@@ -134,13 +132,6 @@ class LedStrip:
                 time.sleep(wait_ms/1000.0)
                 for i in range(0, self.strip.numPixels(), 3):
                     self.strip.setPixelColor(i+q, 0)
-
-    # def heartbeat(self):
-    #    red = [255, 0, 0]
-    #    for i in range (0,50):
-    #        self.fadeIn(red)
-    #        self.fadeOut(red)
-    #        time.sleep(0.5)
 
     def fade_hit(self, start, end, color):
         iterations = 50.0
